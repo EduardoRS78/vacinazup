@@ -30,7 +30,7 @@ public class VacinaController {
 	
 	@RequestMapping("/vacinas")
 	public ModelAndView listaVacinas(){
-		ModelAndView mv = new ModelAndView("index");
+		ModelAndView mv = new ModelAndView("vacina/listaVacina");
 		Iterable<Vacina> vacinas = er.findAll();
 		mv.addObject("vacinas", vacinas);
 		return mv;
