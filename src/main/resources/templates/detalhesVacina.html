@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  
+	  <head>
+	  <title>VacinaZup</title>
+	  <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+  
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	 
+	  
+	  </head>
+	  
+	  <body>
+	  
+	 <header>
+	<nav class="menu">
+	<div class="nav-wrapper">
+		      <a href="#" class="brand-logo">Vacinas:</a>
+		      <ul id="nav-mobile" class="right hide-on-med-and-down">
+		      <li><a href="/vacinas" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Listar de Vacinas</a></li>		
+	</ul>
+	</div>
+	</nav>
+	</header>
+	
+	<div th:each="vacina : ${vacina}" class="container detalhesVacina">
+	<h5>Detalhes das vacinas</h5>
+		<div class="row">
+			<p>Nome: <span th:text="${vacina.nome}"></span></p>
+			<p>Email: <span th:text="${vacina.email}"></span></p>
+			<p>Data do cadastro da vacina: <span th:text="${vacina.data}"></span></p>
+			
+		</div>
+	</div>
+	<th:block th:include="mensagemValidacao"></th:block> 
+	<div class="container formVacinado">
+		<form method="post" th:object="${vacinado}">
+			Nome: <input type="text" value="" name="nome"  pattern ="[a-zA-Z ]*"   autofocus placeholder="Nome Completo"/>
+			Cpf: <input type="text"  value="" name="cpf"  pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" placeholder="000.000.000.00" class="validate"/>
+			Email: <input type="text" value="" name="email" placeholder="Email" class="validate"/>
+			Data de Nascimento: <input type="date"  value="" name="dataNasc" placeholder="00/00/0000" class="validate"/>
+			Data do uso da vacina: <input type="date"  value="" name="dataVacinacao" placeholder="00/00/0000" class="validate"/>
+			<button class="waves-effect waves-light btn" type="submit">Adicionar</button>
+			
+		</form>	
+		
+		</div>
+		
+		<table class="container tabelaVacinado">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Cpf</th>
+				<th>Email</th>
+				<th>Data de Nascimento</th>
+				<th>Data do uso da vacina</th>
+				<th>Deletar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="vacinado : ${vacinado}">
+				<td><span th:text="${vacinado.nome}"></span></td>
+				<td><span th:text="${vacinado.cpf}"></span></td>
+				<td><span th:text="${vacinado.email}"></span></td>
+				<td><span th:text="${vacinado.dataNasc}"></span></td>
+				<td><span th:text="${vacinado.dataVacinacao}"></span></td>
+				<td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('VC#deletarVacinado').arg(0, vacinado.cod)).build()}"><i class="material-icons left">delete</i></a></td>
+			</tr>
+		</tbody>
+	</table>
+		
+		
+		    
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+	  </body>
+	</html>  

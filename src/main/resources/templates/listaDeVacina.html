@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  
+	  <head>
+	  <title>VacinaZup</title>
+	  <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+  
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	 
+	  
+	  </head>
+	  
+	  <body>
+	  
+	 <header>
+	<nav class="menu">
+	<div class="nav-wrapper">
+		      <a href="#" class="brand-logo">Vacinas:</a>
+		      <ul id="nav-mobile" class="right hide-on-med-and-down">
+		      <li><a href="/CadastraVacina"class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline </i>Cadastro de vacinas </a></li>		
+	</ul>
+	</div>
+	</nav>
+	</header>
+    <table class="container">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Data</th>
+                <th>Deletar</th>
+                           
+
+            </tr>
+        
+        </thead>
+        <tbody>
+    <tr th:each="vacina : ${vacina}" class="container">
+        
+            <td><a th:href="${(#mvc.url('VC#detalhesVacina').arg(0, vacina.codigo)).build()}"><span th:text="${vacina.nome}"></span></a></td>
+            <td>Email: <span th:text="${vacina.email}"></span></td>
+            <td>Data: <span th:text="${vacina.data}"></span></td>
+            <td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('VC#deletarVacina').arg(0, vacina.codigo)).build()}"><i class="material-icons left">delete</i></a></td>
+       
+       </tbody>
+       </table>
+    
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+	  </body>
+	</html>  
+	  
+	  
